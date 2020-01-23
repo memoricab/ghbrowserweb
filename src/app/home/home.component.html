@@ -1,0 +1,17 @@
+<div *ngIf="authenticated" style="text-align:center" class="container">
+    <div class="container" role="main">
+        <div class="wrapper">
+            <div id="formContent">
+                Content
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!loaded" class="container">
+    <app-loading></app-loading>
+</div>
+
+
+<router-outlet></router-outlet>

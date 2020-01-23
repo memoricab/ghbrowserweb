@@ -1,0 +1,26 @@
+<div *ngIf="loaded" class="container" role="main">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <form>
+                <button mat-stroked-button color="primary" type="button" (click)="loginGithub()" class="fadeIn fourth"
+                    value="Log In">
+                    <i class="fa fa-github fa-2x" aria-hidden="true"></i> Continue with Github</button>
+            </form>
+            <div id="formFooter">
+                <footer>
+                    Made with &nbsp;
+                    <p>
+                        <fa name="heart" style="color:red"></fa>
+                    </p>
+                    &nbsp; in Tallinn &bull; RepoStatInc
+                </footer>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="!loaded">
+    <app-loading></app-loading>
+</div>
+
+<router-outlet></router-outlet>
