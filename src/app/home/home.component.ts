@@ -1,22 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeService, UserRepository } from './home.service';
 import { Router } from '@angular/router';
 import { User } from './home.service';
+import { tap, debounceTime, map, switchMap, finalize } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { Alert } from '../extra/alert.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+    //todo boolean refactor
+
+    //main
     user: User;
     authenticated = false;
     loaded = false;
-    searchUser = {};
+
+    //search
     searchProfileActive = false;
 
+    // auto complete
+    autoCompleteList: any;
+    searchForm: FormGroup;
+    isLoading = false;
 
-    constructor(router: Router, private homeService: HomeService) {
+
+    constructor(public alert: MatDialog, private fb: FormBuilder, router: Router, private homeService: HomeService) {
         this.showUserData(router);
     }
 
@@ -32,17 +48,54 @@ export class HomeComponent {
         });;
     }
 
-    searchForUser() {
-        this.homeService.getSearchUserData(this.searchUser).subscribe(response => {
+    searchForUser(username) {
+        this.homeService.getSearchUserData(username).subscribe(response => {
             this.searchProfileActive = true;
             this.user = response;
-            this.searchUser = "";
+        }, error => {
+            if (error.status === 404) {
+                this.showUserNotFoundAlert(username);
+            }
         })
     }
 
     goBackToMyProfile(router: Router) {
-        this.searchUser = "";
+        this.searchForm.get('usernameInput').setValue('');
         this.searchProfileActive = false;
         this.showUserData(router);
+    }
+
+
+    ngOnInit() {
+        this.searchForm = this.fb.group({
+            usernameInput: null
+        })
+
+        this.searchForm
+            .get('usernameInput')
+            .valueChanges
+            .pipe(
+                debounceTime(300),
+                tap(() => this.isLoading = true),
+                switchMap(value => this.homeService.getAutoCompleteList(value)
+                    .pipe(
+                        finalize(() => this.isLoading = false)
+                    )
+                )
+            ).subscribe(data => this.autoCompleteList = data);
+    }
+
+    displayFn(autoComplete) {
+        if (autoComplete) {
+            return autoComplete;
+        }
+    }
+
+    showUserNotFoundAlert(username) {
+        console.log(username)
+        const dialogRef = this.alert.open(Alert, {
+            width: '250px',
+            data: { message: username + " not found on Github." }
+        });
     }
 }

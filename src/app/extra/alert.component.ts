@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+export interface DialogData {
+    message: string;
+}
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert.component.html',
-    styleUrls: ['./alert.component.css']
+    templateUrl: './alert.component.html'
 })
-export class Alert implements OnInit {
-    constructor() { }
+export class Alert {
 
-    ngOnInit() {
+    constructor(
+        public dialogRef: MatDialogRef<Alert>,
+        @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
 }

@@ -9,7 +9,7 @@
             <div class="col-md-5">
                 <div class="profile-head">
                     <h5>
-                        {{user.name}}
+                        {{user.login}}
                     </h5>
                     <h6 class="text-muted">
                         {{user.bio}}
@@ -23,34 +23,50 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <button *ngIf="searchProfileActive" (click)="goBackToMyProfile()" class="btn btn-sm btn-info">Go back to
+                <button mat-raised-button *ngIf="searchProfileActive" (click)="goBackToMyProfile()">Go back to
                     my profile</button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
+                    <h5><span>{{user.name}}</span></h5>
+                    <br />
                     <h6>Followers: <span class="badge badge-info">{{user.followers}}</span></h6>
                     <h6>Following: <span class="badge badge-info">{{user.following}}</span></h6>
                     <h6 *ngIf="user.location">Location: <span class="badge badge-info">{{user.location}}</span></h6>
                     <h6>Public Repos: <span class="badge badge-info">{{user.public_repos}}</span></h6>
                 </div>
+                <br />
+                <br />
                 <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <button (click)="searchForUser(searchUser)" class="btn btn-outline-secondary search-for-user"
-                            type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </div>
-                    <input type="text" [(ngModel)]="searchUser.username" [ngModelOptions]="{standalone: true}"
-                        class="form-control" aria-label="Small" placeholder="Search user"
-                        aria-describedby="inputGroup-sizing-sm">
+                    <form class="search-form" [formGroup]='searchForm'>
+                        <mat-form-field class="search-full-width">
+                            <input matInput placeholder="Search user" [matAutocomplete]="auto"
+                                formControlName='usernameInput'>
+                        </mat-form-field>
 
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngIf="isLoading" class="is-loading">
+                                <mat-spinner diameter="50"></mat-spinner>
+                            </mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let autoComplete of autoCompleteList"
+                                    [value]="autoComplete.searchedUsername">
+                                    <span>{{ autoComplete.searchedUsername }}</span>
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                        <button (click)="searchForUser(searchForm.get('usernameInput').value)"
+                            mat-raised-button>Search</button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-8">
                 <div *ngIf="user.gitRepos.length != 0" class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <ul class="list-group">
-                            <a *ngFor="let repo of user.gitRepos" href="{{repo.html_url}}"
+                            <a *ngFor="let repo of user.gitRepos" target="_blank" href="{{repo.html_url}}"
                                 class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">{{repo.name}}
                                 <span class="badge badge-primary badge-pill">{{repo.full_name}}</span></a>
 

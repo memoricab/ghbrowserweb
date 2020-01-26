@@ -12,7 +12,7 @@ body{
     text-align: center;
 }
 .profile-img img{
-    width: 70%;
+    width: 45%;
     height: 100%;
 }
 .profile-img .file {
@@ -59,8 +59,7 @@ body{
     border-bottom:2px solid #0062cc;
 }
 .profile-work{
-    padding: 14%;
-    margin-top: -15%;
+    text-align: center
 }
 .profile-work p{
     font-size: 12px;
@@ -107,4 +106,16 @@ body{
 }
 :-moz-placeholder { /* Firefox 18- */
    font-size: 8pt;
+}
+
+.search-form {
+  width: 100%;
+}
+
+.search-full-width {
+  width: 100%;
+}
+
+.search-btn {
+    height: 35px;
 }

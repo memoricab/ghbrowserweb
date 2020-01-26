@@ -13,15 +13,22 @@ import { AppService } from './app.service';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { LoadingComponent } from './extra/loading.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { Alert } from './extra/alert.component';
+import { NotFoundComponent } from './extra/notFound.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'oauth2/redirect', component: RedirectHandler }
-  //{ path: '**', component: NotFoundComponent }
+  { path: 'oauth2/redirect', component: RedirectHandler },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
@@ -30,7 +37,9 @@ const routes: Routes = [
     LoginComponent,
     HomeComponent,
     RedirectHandler,
-    LoadingComponent
+    LoadingComponent,
+    Alert,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +48,21 @@ const routes: Routes = [
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     HttpClientModule,
-    FormsModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [AppService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor, multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [Alert]
 })
 export class AppModule { }
