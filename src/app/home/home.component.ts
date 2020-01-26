@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HomeService } from './home.service';
+import { HomeService, UserRepository } from './home.service';
 import { Router } from '@angular/router';
+import { User } from './home.service';
 
 @Component({
     selector: 'app-home',
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-    user = {}
+    user: User;
     authenticated = false;
     loaded = false;
+    searchUser = {};
+    searchProfileActive = false;
+
 
     constructor(router: Router, private homeService: HomeService) {
         this.showUserData(router);
@@ -26,5 +30,19 @@ export class HomeComponent {
                 router.navigateByUrl('/login');
             }
         });;
+    }
+
+    searchForUser() {
+        this.homeService.getSearchUserData(this.searchUser).subscribe(response => {
+            this.searchProfileActive = true;
+            this.user = response;
+            this.searchUser = "";
+        })
+    }
+
+    goBackToMyProfile(router: Router) {
+        this.searchUser = "";
+        this.searchProfileActive = false;
+        this.showUserData(router);
     }
 }

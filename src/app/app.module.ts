@@ -13,6 +13,7 @@ import { AppService } from './app.service';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { LoadingComponent } from './extra/loading.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [AppService,
     {
