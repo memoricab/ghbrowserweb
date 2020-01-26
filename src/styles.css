@@ -6,14 +6,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
   background: lightskyblue;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
 }
 
 a {

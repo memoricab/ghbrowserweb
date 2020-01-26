@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService, UserRepository } from './home.service';
+import { HomeService } from './home.service';
 import { Router } from '@angular/router';
 import { User } from './home.service';
-import { tap, debounceTime, map, switchMap, finalize } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FormControl } from '@angular/forms';
+import { tap, debounceTime, switchMap, finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Alert } from '../extra/alert.component';
@@ -51,7 +48,7 @@ export class HomeComponent implements OnInit {
     searchForUser(username) {
         this.homeService.getSearchUserData(username).subscribe(response => {
             this.searchProfileActive = true;
-            this.user = response;
+            this.user = response.body;
         }, error => {
             if (error.status === 404) {
                 this.showUserNotFoundAlert(username);
