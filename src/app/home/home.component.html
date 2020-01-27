@@ -36,6 +36,7 @@
                     <h6>Following: <span class="badge badge-info">{{user.following}}</span></h6>
                     <h6 *ngIf="user.location">Location: <span class="badge badge-info">{{user.location}}</span></h6>
                     <h6>Public Repos: <span class="badge badge-info">{{user.public_repos}}</span></h6>
+                    <button mat-raised-button *ngIf="!searchProfileActive" (click)="logout()">Logout</button>
                 </div>
                 <br />
                 <br />

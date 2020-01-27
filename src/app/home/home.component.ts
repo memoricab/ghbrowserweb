@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     isLoading = false;
 
 
-    constructor(public alert: MatDialog, private fb: FormBuilder, router: Router, private homeService: HomeService) {
+    constructor(public alert: MatDialog, private fb: FormBuilder, private router: Router, private homeService: HomeService) {
         this.showUserData(router);
     }
 
@@ -94,5 +94,10 @@ export class HomeComponent implements OnInit {
             width: '250px',
             data: { message: username + " not found on Github." }
         });
+    }
+
+    logout() {
+        localStorage.removeItem("accessToken");
+        this.router.navigateByUrl("/login");
     }
 }
