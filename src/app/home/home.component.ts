@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
             this.searchProfileActive = true;
             this.user = response.body;
         }, error => {
-            if (error.status === 404) {
+            if (error.error.status === 404) {
                 this.showUserNotFoundAlert(username);
             }
         })
@@ -90,9 +90,9 @@ export class HomeComponent implements OnInit {
 
     showUserNotFoundAlert(username) {
         console.log(username)
-        const dialogRef = this.alert.open(Alert, {
+        this.alert.open(Alert, {
             width: '250px',
-            data: { message: username + " not found on Github." }
+            data: { message: username + " not found on Github.", title: "Not Found" }
         });
     }
 

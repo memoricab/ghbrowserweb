@@ -16,17 +16,9 @@ export class LoginComponent {
         private router: Router
     ) {
         this.isLoaded = true;
-        this.routeToHomeIfLoggedIn();
     }
 
     loginGithub() {
         this.loginService.redirectToGithub();
-    }
-
-    routeToHomeIfLoggedIn() {
-        this.loginService.checkIfAuth().subscribe(response => {
-            this.isLoaded = true;
-            this.router.navigateByUrl("/home");
-        });;
     }
 }

@@ -14,8 +14,4 @@ export class LoginService {
     redirectToGithub() {
         window.location.href = GITHUB_AUTH_URL;
     }
-
-    checkIfAuth() {
-        return this.http.get(this.authCheckApi, { observe: 'response' });
-    }
 }
