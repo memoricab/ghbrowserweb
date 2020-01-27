@@ -1,4 +1,4 @@
-<div class="container emp-profile">
+<div *ngIf="isLoaded && isAuthenticated" class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
@@ -79,7 +79,7 @@
     </form>
 </div>
 
-<div *ngIf="!loaded" class="container">
+<div *ngIf="!isLoaded" class="container">
     <app-loading></app-loading>
 </div>
 

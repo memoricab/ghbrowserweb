@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
 
     //main
     user: User;
-    authenticated = false;
-    loaded = false;
+    isAuthenticated = false;
+    isLoaded = false;
 
     //search
     searchProfileActive = false;
@@ -36,8 +36,8 @@ export class HomeComponent implements OnInit {
     showUserData(router: Router) {
         this.homeService.getUserData().subscribe(response => {
             this.user = response.body;
-            this.authenticated = true;
-            this.loaded = true;
+            this.isAuthenticated = true;
+            this.isLoaded = true;
         }, error => {
             if (error) {
                 router.navigateByUrl('/login');
