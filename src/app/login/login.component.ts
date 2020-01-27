@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    loaded = false;
+    isLoaded = false;
 
     constructor(
         private loginService: LoginService,
         private router: Router
     ) {
-        this.loaded = true;
+        this.isLoaded = true;
         this.routeToHomeIfLoggedIn();
     }
 
@@ -25,7 +25,7 @@ export class LoginComponent {
 
     routeToHomeIfLoggedIn() {
         this.loginService.checkIfAuth().subscribe(response => {
-            this.loaded = true;
+            this.isLoaded = true;
             this.router.navigateByUrl("/home");
         });;
     }

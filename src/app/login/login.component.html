@@ -1,4 +1,4 @@
-<div *ngIf="loaded" class="container" role="main">
+<div *ngIf="isLoaded" class="container" role="main">
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <form>
@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="!loaded">
+<div *ngIf="!isLoaded">
     <app-loading></app-loading>
 </div>
 
