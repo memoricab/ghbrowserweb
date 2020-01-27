@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
 
     //search
     searchProfileActive = false;
+    isSearching = false;
+    isGoingBackToProfile = false;
 
     // auto complete
     autoCompleteList: any;
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
             this.user = response.body;
             this.isAuthenticated = true;
             this.isLoaded = true;
+            this.isGoingBackToProfile = false;
         }, error => {
             if (error) {
                 router.navigateByUrl('/login');
@@ -46,9 +49,11 @@ export class HomeComponent implements OnInit {
     }
 
     searchForUser(username) {
+        this.isSearching = true;
         this.homeService.getSearchUserData(username).subscribe(response => {
             this.searchProfileActive = true;
             this.user = response.body;
+            this.isSearching = false;
         }, error => {
             if (error.error.status === 404) {
                 this.showUserNotFoundAlert(username);
@@ -57,6 +62,7 @@ export class HomeComponent implements OnInit {
     }
 
     goBackToMyProfile(router: Router) {
+        this.isGoingBackToProfile = true;
         this.searchForm.get('usernameInput').setValue('');
         this.searchProfileActive = false;
         this.showUserData(router);
@@ -89,7 +95,6 @@ export class HomeComponent implements OnInit {
     }
 
     showUserNotFoundAlert(username) {
-        console.log(username)
         this.alert.open(Alert, {
             width: '250px',
             data: { message: username + " not found on Github.", title: "Not Found" }

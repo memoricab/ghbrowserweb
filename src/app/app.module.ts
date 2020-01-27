@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
 import { Alert } from './extra/alert.component';
 import { NotFoundComponent } from './extra/notFound.component';
+import { MiniLoadingComponent } from './extra/mini-loading.component';
 
 
 const routes: Routes = [
@@ -39,7 +40,8 @@ const routes: Routes = [
     RedirectHandler,
     LoadingComponent,
     Alert,
-    NotFoundComponent
+    NotFoundComponent,
+    MiniLoadingComponent
   ],
   imports: [
     BrowserModule,

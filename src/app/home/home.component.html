@@ -25,6 +25,9 @@
             <div class="col-md-2">
                 <button mat-raised-button *ngIf="searchProfileActive" (click)="goBackToMyProfile()">Go back to
                     my profile</button>
+                <div *ngIf="isGoingBackToProfile">
+                    <mini-loading></mini-loading>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -60,6 +63,9 @@
                         </mat-autocomplete>
                         <button (click)="searchForUser(searchForm.get('usernameInput').value)"
                             mat-raised-button>Search</button>
+                        <div *ngIf="isSearching">
+                            <mini-loading></mini-loading>
+                        </div>
                     </form>
                 </div>
             </div>
