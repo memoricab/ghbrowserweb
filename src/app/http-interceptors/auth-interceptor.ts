@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { ACCESS_TOKEN } from '../app.service';
 import { tap } from 'rxjs/internal/operators/tap';
 import { catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Alert } from '../extra/alert.component';
 import { MatDialog } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = localStorage.getItem(ACCESS_TOKEN);
+        const authToken = localStorage.getItem(environment.ACCESS_TOKEN);
         const authReq = req.clone({
             headers: req.headers.set('Authorization', 'Bearer ' + authToken)
         });

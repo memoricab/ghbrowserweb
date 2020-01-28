@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GITHUB_AUTH_URL } from '../app.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +11,7 @@ export class LoginService {
 
     }
     redirectToGithub() {
-        window.location.href = GITHUB_AUTH_URL;
+        console.log(environment.GITHUB_AUTH_URL);
+        window.location.href = environment.GITHUB_AUTH_URL;
     }
 }

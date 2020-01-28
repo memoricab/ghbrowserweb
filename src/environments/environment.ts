@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BASE_URL: 'http://localhost:8080',
+  ACCESS_TOKEN: 'accessToken',
+  GITHUB_AUTH_URL: 'http://localhost:8080/oauth2/authorize/github?redirect_uri=http://localhost:4200/oauth2/redirect',
+  USER_API: "http://localhost:8080/api/user",
+  SEARCH_USER_API: "http://localhost:8080/api/search"
 };
 
 /*

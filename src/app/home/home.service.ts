@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { BASE_URL } from '../app.service';
-
-
-const USER_API = BASE_URL + "/api/user";
-const SEARCH_USER_API = BASE_URL + "/api/search";
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -18,15 +13,15 @@ export class HomeService {
     }
 
     getUserData() {
-        return this.http.get<User>(USER_API, { observe: 'response' });
+        return this.http.get<User>(environment.USER_API, { observe: 'response' });
     }
 
     getSearchUserData(username) {
-        return this.http.get<User>(SEARCH_USER_API + "?username=" + username, { observe: 'response' });
+        return this.http.get<User>(environment.SEARCH_USER_API + "?username=" + username, { observe: 'response' });
     }
 
     getAutoCompleteList(query) {
-        return this.http.get(SEARCH_USER_API + "/?autoCompleteQuery=" + query);
+        return this.http.get(environment.SEARCH_USER_API + "/?autoCompleteQuery=" + query);
 
     }
 }

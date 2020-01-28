@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ACCESS_TOKEN } from './app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +20,7 @@ export class RedirectHandler {
         activatedRoute.queryParams.subscribe(params => {
             let token = params['token'];
             if (token) {
-                localStorage.setItem(ACCESS_TOKEN, token);
+                localStorage.setItem(environment.ACCESS_TOKEN, token);
                 this.router.navigateByUrl("/home");
             } else {
                 window.alert("Error receiving token: " + params['error']);
