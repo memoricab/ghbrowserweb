@@ -24,6 +24,7 @@ export class RedirectHandler {
                 this.router.navigateByUrl("/home");
             } else {
                 window.alert("Error receiving token: " + params['error']);
+                this.router.navigateByUrl("/login");
             }
         });
     }
