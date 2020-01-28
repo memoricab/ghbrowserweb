@@ -99,6 +99,7 @@ export class HomeComponent implements OnInit {
             width: '250px',
             data: { message: username + " not found on Github.", title: "Not Found" }
         });
+        this.isSearching = false;
     }
 
     logout() {
