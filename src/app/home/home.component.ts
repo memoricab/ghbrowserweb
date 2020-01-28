@@ -49,16 +49,18 @@ export class HomeComponent implements OnInit {
     }
 
     searchForUser(username) {
-        this.isSearching = true;
-        this.homeService.getSearchUserData(username).subscribe(response => {
-            this.searchProfileActive = true;
-            this.user = response.body;
-            this.isSearching = false;
-        }, error => {
-            if (error.error.status === 404) {
-                this.showUserNotFoundAlert(username);
-            }
-        })
+        if (username.trim()) {
+            this.isSearching = true;
+            this.homeService.getSearchUserData(username).subscribe(response => {
+                this.searchProfileActive = true;
+                this.user = response.body;
+                this.isSearching = false;
+            }, error => {
+                if (error.error.status === 404) {
+                    this.showUserNotFoundAlert(username);
+                }
+            })
+        }
     }
 
     goBackToMyProfile(router: Router) {
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.searchForm = this.fb.group({
-            usernameInput: null
+            usernameInput: ""
         })
 
         this.searchForm
