@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BASE_URL } from '../app.service';
 
-const API_BASE_URL = "http://localhost:8080/api"
-const USER_API = API_BASE_URL + "/user";
-const SEARCH_USER_API = API_BASE_URL + "/search";
+
+const USER_API = BASE_URL + "/api/user";
+const SEARCH_USER_API = BASE_URL + "/api/search";
 
 
 @Injectable({

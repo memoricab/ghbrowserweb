@@ -6,7 +6,6 @@ import { GITHUB_AUTH_URL } from '../app.service';
     providedIn: 'root'
 })
 export class LoginService {
-    authCheckApi = "http://localhost:8080/api/user/auth"
 
     constructor(private http: HttpClient) {
 

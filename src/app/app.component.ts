@@ -23,8 +23,11 @@ export class RedirectHandler {
                 localStorage.setItem(ACCESS_TOKEN, token);
                 this.router.navigateByUrl("/home");
             } else {
-                window.alert("Error receiving token");
+                window.alert("Error receiving token: " + params['error']);
             }
         });
     }
 }
+
+
+//TODO fix when search gives 404 loading bar
