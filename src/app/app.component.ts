@@ -28,6 +28,3 @@ export class RedirectHandler {
         });
     }
 }
-
-
-//TODO fix when search gives 404 loading bar

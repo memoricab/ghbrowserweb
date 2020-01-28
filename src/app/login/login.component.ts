@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { HomeService } from '../home/home.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -9,13 +7,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    isLoaded = false;
+    constructor(private loginService: LoginService) {
 
-    constructor(
-        private loginService: LoginService,
-        private router: Router
-    ) {
-        this.isLoaded = true;
     }
 
     loginGithub() {
