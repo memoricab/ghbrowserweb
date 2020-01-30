@@ -32,10 +32,10 @@ export class HomeComponent implements OnInit {
 
 
     constructor(public alert: MatDialog, private fb: FormBuilder, private router: Router, private homeService: HomeService) {
-        this.showUserData(router);
+        this.showUserData();
     }
 
-    showUserData(router: Router) {
+    showUserData() {
         this.homeService.getUserData().subscribe(response => {
             this.user = response.body;
             this.isAuthenticated = true;
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
             this.isGoingBackToProfile = false;
         }, error => {
             if (error) {
-                router.navigateByUrl('/login');
+                this.router.navigateByUrl('/login');
             }
         });;
     }
@@ -63,11 +63,11 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    goBackToMyProfile(router: Router) {
+    goBackToMyProfile() {
         this.isGoingBackToProfile = true;
         this.searchForm.get('usernameInput').setValue('');
         this.searchProfileActive = false;
-        this.showUserData(router);
+        this.showUserData();
     }
 
 

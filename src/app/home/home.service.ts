@@ -27,6 +27,16 @@ export class HomeService {
 }
 
 export interface User {
+    location: string,
+    gitRepos: [],
+    avatar_url: string,
+    login: string,
+    bio: string,
+    followers: number,
+    following: number,
+    public_repos: number,
+    name: string
+
 }
 
 export interface UserRepository {
