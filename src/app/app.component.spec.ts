@@ -26,10 +26,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ghbrowserweb');
   });
 
-  it('should render title', () => {
+  it('should render footer', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ghbrowserweb app is running!');
+    expect(compiled.querySelector('.text-muted').textContent).toContain('Created by');
   });
 });
